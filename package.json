@@ -1,0 +1,18 @@
+{ "name" : "resanitizer"
+, "author" : "Dan MacTough <danmactough@gmail.com>"
+, "description" : "Regular expression-based HTML sanitizer and ad remover, geared toward RSS feed descriptions"
+, "version" : "0.1.0"
+, "keywords" : ["sanitize", "html", "regexp", "security"]
+, "homepage" : "http://github.com/danmactough/node-resanitizer"
+, "repository" :
+  { "type" : "git"
+  , "url" : "git://github.com/danmactough/node-resanitizer.git"
+  }
+, "bugs" :
+  { "url" : "http://github.com/danmactough/node-resanitizer/issues"}
+, "main" : "./resanitizer.js"
+, "engines" :
+  { "node" : ">= 0.6.0" }
+, "dependencies" : {}
+, "devDependencies": {}
+}

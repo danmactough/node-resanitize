@@ -1,4 +1,23 @@
-function sanitize (str) {
+/*!
+ * resanitize - Regular expression-based HTML sanitizer and ad remover, geared toward RSS feed descriptions
+ * Copyright(c) 2012 Dan MacTough <danmactough@gmail.com>
+ * All rights reserved.
+ */
+
+/**
+ * Remove unsafe parts and ads from HTML
+ *
+ * Example:
+ *
+ *      var resanitize = require('resanitize');
+ *      resanitize('<div style="border: 400px solid pink;">Headline</div>');
+ *      // => '<div>Headline</div>'
+ *
+ * @param {String} HTML string to sanitize
+ * @return {String} sanitized HTML
+ * @api public
+ */
+function resanitize (str) {
   str = stripAsciiCtrlChars(str);
   str = fixSpace(str);
   str = stripComments(str);
@@ -10,7 +29,7 @@ function sanitize (str) {
   str = stripUnsafeAttrs(str);
   return str;
 }
-module.exports = sanitize;
+module.exports = resanitize;
 
 /**
  * Replace UTF-8 non-breaking space with a regular space and strip null bytes

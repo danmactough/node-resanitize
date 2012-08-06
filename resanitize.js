@@ -206,6 +206,7 @@ function stripAds (str) {
             .replace(/<embed[^>]*?castfire_player[\s\S]*?> *?(<\/embed>)?/gi, '')
             .replace(/<embed[^>]*?src=("|')[^>]*?castfire\.com[^>]+?\1[\s\S]*?> *?(<\/embed>)?/gi, '')
             .replace(/<p align=("|')right\1><em>Sponsor<\/em>[\s\S]*?<\/p>/gi, '')
+            .replace(/<div [\s\S]*?<img [^>]*?src=(?:"|')[^>]*?\/share-buttons\/[\s\S]*?<\/div>[\s]*/gi, '')
             // This is that annoying footer in every delicious item
             .replace(/<span[^>]*?>\s*?<a[^>]*?href=("|')[^\1]+?src=feed_newsgator\1[^>]*?>[\s\S]*<\/span>/gi, '')
             // This is the annoying footer from ATL

@@ -61,7 +61,7 @@ module.exports.stripAsciiCtrlChars = stripAsciiCtrlChars;
  * Strip HTML comments
  */
 function stripComments (str) {
-  return str.replace(/<!--[^>]*?-->/g, '');
+  return str.replace(/<!--[^>]*?>.*?<![^>]*?-->/g, '');
 }
 module.exports.stripComments = stripComments;
 

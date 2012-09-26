@@ -197,6 +197,7 @@ function stripAds (str) {
             .replace(/<a[^>]*?href=("|')http:\/\/api\.tweetmeme\.com\/share\?[^>]*?\1[\s\S]*?<\/a>/gi, '')
             .replace(/<p><a[^>]*?href=("|')http:\/\/rss\.cnn\.com\/+?(?:~|%7e)a\/[^>]*?\1[\s\S]*?<\/p>/gi, '')
             .replace(/<img[^>]*?src=("|')http:\/\/feeds\.[^>]+?\.[^>]+?\/(?:~|%7e)r\/[^>]+?\1[\s\S]*?>/gi, '')
+            .replace(/<img[^>]*?src=("|')http:\/\/rss\.nytimes\.com\/c\/[^>]*?\1.*?>.*$/gim, '')
             .replace(/<img[^>]*?src=("|')http:\/\/(?:feedads\.googleadservices|feedproxy\.google|feeds2\.feedburner)\.com\/(?:~|%7e)r\/[^>]+?\1[\s\S]*?>/gi, '')
             .replace(/<img[^>]*?src=("|')http:\/\/rss\.cnn\.com\/~r\/[^>]*?\1[\s\S]*?>/gi, '')
             .replace(/<img[^>]*?src=("|')http:\/\/[^>]*?\.?fmpub\.net\/adserver\/[^>]*?\1[\s\S]*?>/gi, '')

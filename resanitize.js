@@ -199,6 +199,7 @@ function stripAds (str) {
             .replace(/<img[^>]*?src=("|')http:\/\/feeds\.[^>]+?\.[^>]+?\/(?:~|%7e)r\/[^>]+?\1[\s\S]*?>/gi, '')
             .replace(/<img[^>]*?src=("|')http:\/\/rss\.nytimes\.com\/c\/[^>]*?\1.*?>.*$/gim, '')
             .replace(/<img[^>]*?src=("|')http:\/\/feeds\.washingtonpost\.com\/c\/[^>]*?\1.*?>.*$/gim, '')
+            .replace(/<img[^>]*?src=("|')http:\/\/[^>]*?\.?feedsportal\.com\/c\/[^>]*?\1.*?>.*$/gim, '')
             .replace(/<img[^>]*?src=("|')http:\/\/(?:feedads\.googleadservices|feedproxy\.google|feeds2\.feedburner)\.com\/(?:~|%7e)r\/[^>]+?\1[\s\S]*?>/gi, '')
             .replace(/<img[^>]*?src=("|')http:\/\/rss\.cnn\.com\/~r\/[^>]*?\1[\s\S]*?>/gi, '')
             .replace(/<img[^>]*?src=("|')http:\/\/[^>]*?\.?fmpub\.net\/adserver\/[^>]*?\1[\s\S]*?>/gi, '')

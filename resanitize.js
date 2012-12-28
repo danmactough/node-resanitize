@@ -180,6 +180,7 @@ function stripAds (str) {
             .replace(/<div[^>]*?class=("|')(?:feedflare|zemanta-pixie)\1[^>]*?>[\s\S]*?<\/div>/gi, '')
             .replace(/<!--AD BEGIN-->[\s\S]*?<!--AD END-->\s*/gi, '')
             .replace(/<table[^>]*?>[\s\S]*?<\/table>\s*?<div[^>]*?>[\s\S]*?Ads by Pheedo[\s\S]*?<\/div>/gi, '')
+            .replace(/<table[^>]*?>.*?<img[^>]*?src=("|')[^>]*?advertisement[^>]*?\1.*?>.*?<\/table>/gi, '')
             .replace(/<br[^>]*?>\s*?<br[^>]*?>\s*?<span[^>]*?class=("|')advertisement\1[^>]*?>[\s\S]*?<\/span>[\s\S]*<div[^>]*?>[\s\S]*?Ads by Pheedo[\s\S]*?<\/div>/gi, '')
             .replace(/<br[^>]*?>\s*?<br[^>]*?>\s*?(?:<[^>]+>\s*)*?<hr[^>]*?>\s*?<div[^>]*?>(?:Featured Advertiser|Presented By:)<\/div>[\s\S]*<div[^>]*?>[\s\S]*?(?:Ads by Pheedo|ads\.pheedo\.com)[\s\S]*?<\/div>/gi, '')
             .replace(/<br[^>]*?>\s*?<br[^>]*?>\s*?<a[^>]*?href=("|')http:\/\/[^>]*?\.?(?:pheedo|pheedcontent)\.com\/[^>]*?\1[\s\S]*?<\/a>[\s\S]*$/gim, '')

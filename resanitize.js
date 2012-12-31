@@ -13,11 +13,19 @@
  *      resanitize('<div style="border: 400px solid pink;">Headline</div>');
  *      // => '<div>Headline</div>'
  *
- * @param {String} HTML string to sanitize
+ * @param {String|Buffer} HTML string to sanitize
  * @return {String} sanitized HTML
  * @api public
  */
 function resanitize (str) {
+  if ('string' !== typeof str) {
+    if (Buffer.isBuffer(str)) {
+      str = str.toString();
+    }
+    else {
+      throw new TypeError('Invalid argument: must be String or Buffer');
+    }
+  }
   str = stripAsciiCtrlChars(str);
   str = fixSpace(str);
   str = stripComments(str);

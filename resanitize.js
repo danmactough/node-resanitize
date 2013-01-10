@@ -49,7 +49,8 @@ module.exports = resanitize;
  * Replace UTF-8 non-breaking space with a regular space and strip null bytes
  */
 function fixSpace (str) {
-  return str.replace(/\xc2\xa0/g, ' ')
+  return str.replace(/\u00A0/g, ' ') // Unicode non-breaking space
+            .replace(/\u2028\u2029/g, '') // UCS newline characters
             .replace(/\0/g, '');
 }
 module.exports.fixSpace = fixSpace;

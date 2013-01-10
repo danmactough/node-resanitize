@@ -254,10 +254,10 @@ function stripAds (str) {
 }
 module.exports.stripAds = stripAds;
 
-/*
+/**
+ * Dumbly strip angle brackets
+ */
 function stripHtml (str) {
-  // @TODO
-  return str;
+  return str.replace(/<.*?>/g, '');
 }
 module.exports.stripHtml = stripHtml;
-*/

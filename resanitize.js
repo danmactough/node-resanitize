@@ -13,6 +13,11 @@
  *      resanitize('<div style="border: 400px solid pink;">Headline</div>');
  *      // => '<div>Headline</div>'
  *
+ * References:
+ * - http://en.wikipedia.org/wiki/C0_and_C1_control_codes
+ * - http://en.wikipedia.org/wiki/Unicode_control_characters
+ * - http://www.utf8-chartable.de/unicode-utf8-table.pl
+ *
  * @param {String|Buffer} HTML string to sanitize
  * @return {String} sanitized HTML
  * @api public
@@ -27,6 +32,7 @@ function resanitize (str) {
     }
   }
   str = stripAsciiCtrlChars(str);
+  str = stripExtendedCtrlChars(str);
   str = fixSpace(str);
   str = stripComments(str);
   str = stripAds(str); // It's important that this comes before the remainder
@@ -64,6 +70,14 @@ function stripAsciiCtrlChars (str) {
   return str.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/g, '');
 }
 module.exports.stripAsciiCtrlChars = stripAsciiCtrlChars;
+
+/**
+ * Strip ISO 6429 control characters
+ */
+function stripExtendedCtrlChars (str) {
+  return str.replace(/[\u0080-\u009F]+/g, '');
+}
+module.exports.stripExtendedCtrlChars = stripExtendedCtrlChars;
 
 /**
  * Strip HTML comments

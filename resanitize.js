@@ -50,7 +50,7 @@ module.exports = resanitize;
  */
 function fixSpace (str) {
   return str.replace(/\u00A0/g, ' ') // Unicode non-breaking space
-            .replace(/\u2028\u2029/g, '') // UCS newline characters
+            .replace(/[\u2028\u2029]/g, '') // UCS newline characters
             .replace(/\0/g, '');
 }
 module.exports.fixSpace = fixSpace;

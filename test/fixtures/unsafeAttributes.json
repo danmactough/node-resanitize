@@ -1,4 +1,10 @@
+[
 {
   "original": "<div onclick=\"anything\"foo=\"bar\">",
   "expected": "<div foo=\"bar\">"
+},
+{
+  "original": "<div oninput=\"anything\">",
+  "expected": "<div>"
 }
+]

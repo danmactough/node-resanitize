@@ -15,8 +15,10 @@ describe('resanitize', function (){
   });
   describe('unsafe attributes', function () {
     it('should strip unsafe attributes', function () {
-      var item = require('./fixtures/unsafeAttributes.json');
-      assert.equal(resanitize(item.original), item.expected);
+      var items = require('./fixtures/unsafeAttributes.json');
+      items.forEach(function (item) {
+        assert.equal(resanitize(item.original), item.expected);
+      });
     })
   });
 });

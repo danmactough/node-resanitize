@@ -182,6 +182,7 @@ function stripUnsafeAttrs (str) {
                , 'tabindex'
                , 'target'
                , /on\w+/i
+               , /data-\w+/i
                ];
   return str.replace(/<([^ >]+?) [^>]*?>/g, filterTag(stripAttrs(unsafe)));
 }

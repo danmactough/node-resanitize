@@ -10,5 +10,9 @@
 {
   "original": "<a href=\"javascript:alert('Hi')\">Click me</a>",
   "expected": "<a>Click me</a>"
+},
+{
+  "original": "<div data-id=\"123\">foo</div>",
+  "expected": "<div>foo</div>"
 }
 ]

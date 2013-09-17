@@ -134,7 +134,7 @@ module.exports.stripAttrs = stripAttrs;
 function filterTag (nextFilter) {
   return function (rematch) {
     if ('function' === typeof nextFilter) {
-      rematch = rematch.replace(/(\S+)=("|')[^>]+?\2/g, nextFilter);
+      rematch = rematch.replace(/([^\s"']+?)=("|')[^>]+?\2/g, nextFilter);
     }
     // Cleanup extra whitespace
     return rematch.replace(/\s+/g, ' ')

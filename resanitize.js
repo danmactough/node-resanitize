@@ -112,14 +112,29 @@ module.exports.filterAttrs = filterAttrs;
  * Strip the provided attributes from the tag
  */
 function stripAttrs () {
-  var banned = [];
+  var banned = []
+    , regexes = [];
   if (Array.isArray(arguments[0])) {
-    banned = arguments[0];
+    banned = arguments[0].filter(function (attr) {
+      if ('string' === typeof attr) {
+        return true;
+      }
+      else if (attr.constructor && 'RegExp' === attr.constructor.name) {
+        regexes.push(attr);
+      }
+    });
   } else {
-    banned = Array.prototype.slice.call(arguments);
+    banned = Array.prototype.slice.call(arguments).filter(function (attr) {
+      if ('string' === typeof attr) {
+        return true;
+      }
+      else if (attr.constructor && 'RegExp' === attr.constructor.name) {
+        regexes.push(attr);
+      }
+    });
   }
   return function (attr, name) {
-    if ( ~banned.indexOf(name && name.toLowerCase()) ) {
+    if ( ~banned.indexOf(name && name.toLowerCase()) || regexes.some(function (re) { return re.test(name); }) ) {
       return '';
     } else {
       return attr;
@@ -154,28 +169,7 @@ function stripUnsafeAttrs (str) {
                , 'style'
                , 'clear'
                , 'target'
-               , 'onclick'
-               , 'ondblclick'
-               , 'onmousedown'
-               , 'onmousemove'
-               , 'onmouseover'
-               , 'onmouseout'
-               , 'onmouseup'
-               , 'onkeydown'
-               , 'onkeypress'
-               , 'onkeyup'
-               , 'onabort'
-               , 'onerror'
-               , 'onload'
-               , 'onresize'
-               , 'onscroll'
-               , 'onunload'
-               , 'onblur'
-               , 'onchange'
-               , 'onfocus'
-               , 'onreset'
-               , 'onselect'
-               , 'onsubmit'
+               , /on\w+/i
                ];
   return str.replace(/<([^ >]+?) [^>]*?>/g, filterTag(stripAttrs(unsafe)));
 }

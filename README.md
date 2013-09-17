@@ -17,3 +17,16 @@ npm install resanitize
 
     resanitize(html); // => '<div>Headline</div>'
 ```
+
+## Notes
+
+This module's opinion of "sanitized" might not meet your security requirements.
+The mere fact that it uses regular expressions should make this disclaimer
+unnecessary, but just to be clear: if you intend to display arbitrary user input
+that includes HTML, you're going to want something more robust.
+
+Note that the `stripUnsafeTags` method will loop over the strip an arbitrary
+number of times (10) to try to strip maliciously nested html tags. After the
+maximum number of iterations is reached, if the string still appears to contain
+any unsafe tags, it is deemed unsafe and set to an empty string. If this seems
+unexpected and/or is causing any problems, please raise an [issue](//github.com/danmactough/node-resanitize/issues).

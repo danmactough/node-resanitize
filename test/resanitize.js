@@ -21,4 +21,10 @@ describe('resanitize', function (){
       });
     })
   });
+  describe('comments', function () {
+    it('should strip comments', function () {
+      var item = require('./fixtures/comments.json');
+      assert.equal(resanitize(item.original), item.expected);
+    })
+  });
 });

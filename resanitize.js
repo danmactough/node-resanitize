@@ -92,14 +92,15 @@ module.exports.stripComments = stripComments;
  * Permit only the provided attributes to remain in the tag
  */
 function filterAttrs () {
-  var allowed = [];
+  var allowed = []
+    , script = /javascript:/i;
   if (Array.isArray(arguments[0])) {
     allowed = arguments[0];
   } else {
     allowed = Array.prototype.slice.call(arguments);
   }
   return function (attr, name) {
-    if ( ~allowed.indexOf(name && name.toLowerCase()) ) {
+    if ( ~allowed.indexOf(name && name.toLowerCase()) && !script.test(attr) ) {
       return attr;
     } else {
       return '';
@@ -113,7 +114,8 @@ module.exports.filterAttrs = filterAttrs;
  */
 function stripAttrs () {
   var banned = []
-    , regexes = [];
+    , regexes = []
+    , script = /javascript:/i;
   if (Array.isArray(arguments[0])) {
     banned = arguments[0].filter(function (attr) {
       if ('string' === typeof attr) {
@@ -134,7 +136,7 @@ function stripAttrs () {
     });
   }
   return function (attr, name) {
-    if ( ~banned.indexOf(name && name.toLowerCase()) || regexes.some(function (re) { return re.test(name); }) ) {
+    if ( ~banned.indexOf(name && name.toLowerCase()) || script.test(attr) || regexes.some(function (re) { return re.test(name); }) ) {
       return '';
     } else {
       return attr;

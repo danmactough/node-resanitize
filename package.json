@@ -1,24 +1,41 @@
-{ "name" : "resanitize"
-, "author" : "Dan MacTough <danmactough@gmail.com>"
-, "description" : "Regular expression-based HTML sanitizer and ad remover, geared toward RSS feed descriptions"
-, "version" : "0.1.11"
-, "keywords" : ["sanitize", "html", "regexp", "security"]
-, "homepage" : "http://github.com/danmactough/node-resanitize"
-, "repository" :
-  { "type" : "git"
-  , "url" : "git://github.com/danmactough/node-resanitize.git"
-  }
-, "bugs" :
-  { "url" : "http://github.com/danmactough/node-resanitize/issues"}
-, "main" : "./resanitize.js"
-, "engines" :
-  { "node" : ">= 0.6.0" }
-, "dependencies" : {}
-, "devDependencies": {},
+{
+  "name": "resanitize",
+  "author": "Dan MacTough <danmactough@gmail.com>",
+  "description": "Regular expression-based HTML sanitizer and ad remover, geared toward RSS feed descriptions",
+  "version": "0.1.11",
+  "keywords": [
+    "sanitize",
+    "html",
+    "regexp",
+    "security"
+  ],
+  "homepage": "http://github.com/danmactough/node-resanitize",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danmactough/node-resanitize.git"
+  },
+  "bugs": {
+    "url": "http://github.com/danmactough/node-resanitize/issues"
+  },
+  "main": "./resanitize.js",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "~1.13.0"
+  },
   "licenses": [
     {
       "type": "MIT",
       "url": "https://raw.github.com/danmactough/node-resanitize/master/LICENSE"
     }
-  ]
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "license": "MIT"
 }

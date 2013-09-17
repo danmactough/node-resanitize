@@ -182,19 +182,30 @@ function stripUnsafeAttrs (str) {
 module.exports.stripUnsafeAttrs = stripUnsafeAttrs;
 
 function stripUnsafeTags (str) {
-  return str.replace(/<form[^>]*?>[\s\S]*?<\/form>/gi, '')
-            .replace(/<input[^>]*?>[\s\S]*?<\/input>/gi, '')
-            .replace(/<\/?(?:form|input|font|blink)[^>]*?>/gi, '')
-            // These are XSS/security risks
-            .replace(/<script[^>]*?>[\s\S]*?<\/script>/gi, '')
-            .replace(/<style[^>]*?>[\s\S]*?<\/style>/gi, '') // shouldn't work anyway...
-            .replace(/<comment[^>]*?>[\s\S]*?<\/comment>/gi, '')
-            .replace(/<plaintext[^>]*?>[\s\S]*?<\/plaintext>/gi, '')
-            .replace(/<xmp[^>]*?>[\s\S]*?<\/xmp>/gi, '')
-            .replace(/<\/?(?:link|listing|meta|body|frame|frameset)[^>]*?>/gi, '')
-            // Delete iframes, except those inserted by Google in lieu of video embeds
-            .replace(/<iframe(?![^>]*?src=("|')\S+?reader.googleusercontent.com\/reader\/embediframe.+?\1)[^>]*?>[\s\S]*?<\/iframe>/gi, '')
-            ;
+  var el = /<(?:form|input|font|blink|script|style|comment|plaintext|xmp|link|listing|meta|body|frame|frameset)\b/;
+  var ct = 0, max = 10;
+
+  // We'll repeatedly try to strip any maliciously nested elements up to [max] times
+  while (el.test(str) && ct++ < max) {
+    str = str.replace(/<form[^>]*?>[\s\S]*?<\/form>/gi, '')
+             .replace(/<input[^>]*?>[\s\S]*?<\/input>/gi, '')
+             .replace(/<\/?(?:form|input|font|blink)[^>]*?>/gi, '')
+             // These are XSS/security risks
+             .replace(/<script[^>]*?>[\s\S]*?<\/script>/gi, '')
+             .replace(/<style[^>]*?>[\s\S]*?<\/style>/gi, '') // shouldn't work anyway...
+             .replace(/<comment[^>]*?>[\s\S]*?<\/comment>/gi, '')
+             .replace(/<plaintext[^>]*?>[\s\S]*?<\/plaintext>/gi, '')
+             .replace(/<xmp[^>]*?>[\s\S]*?<\/xmp>/gi, '')
+             .replace(/<\/?(?:link|listing|meta|body|frame|frameset)[^>]*?>/gi, '')
+             // Delete iframes, except those inserted by Google in lieu of video embeds
+             .replace(/<iframe(?![^>]*?src=("|')\S+?reader.googleusercontent.com\/reader\/embediframe.+?\1)[^>]*?>[\s\S]*?<\/iframe>/gi, '')
+             ;
+  }
+  if (el.test(str)) {
+    // We couldn't safely strip the HTML, so we return an empty string
+    return '';
+  }
+  return str;
 }
 module.exports.stripUnsafeTags = stripUnsafeTags;
 

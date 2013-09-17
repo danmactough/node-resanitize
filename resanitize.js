@@ -167,7 +167,17 @@ function stripUnsafeAttrs (str) {
   var unsafe = [ 'id'
                , 'class'
                , 'style'
+               , 'accesskey'
+               , 'action'
+               , 'autocomplete'
+               , 'autofocus'
                , 'clear'
+               , 'contextmenu'
+               , 'contenteditable'
+               , 'draggable'
+               , 'dropzone'
+               , 'method'
+               , 'tabindex'
                , 'target'
                , /on\w+/i
                ];

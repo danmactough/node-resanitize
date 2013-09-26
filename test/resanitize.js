@@ -11,7 +11,7 @@ describe('resanitize', function (){
     it('should strip unsafe elements', function () {
       var item = require('./fixtures/unsafeElements.json');
       assert.equal(resanitize(item.original), item.expected);
-    })
+    });
   });
   describe('unsafe attributes', function () {
     it('should strip unsafe attributes', function () {
@@ -19,12 +19,14 @@ describe('resanitize', function (){
       items.forEach(function (item) {
         assert.equal(resanitize(item.original), item.expected);
       });
-    })
+    });
   });
   describe('comments', function () {
     it('should strip comments', function () {
-      var item = require('./fixtures/comments.json');
-      assert.equal(resanitize(item.original), item.expected);
-    })
+      var items = require('./fixtures/comments.json');
+      items.forEach(function (item) {
+        assert.equal(resanitize.stripComments(item.original), item.expected);
+      });
+    });
   });
 });

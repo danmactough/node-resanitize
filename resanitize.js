@@ -5,6 +5,10 @@
  */
 
 /**
+ * Dependencies
+ */
+var validator = require('validator');
+/**
  * Remove unsafe parts and ads from HTML
  *
  * Example:
@@ -38,6 +42,7 @@ function resanitize (str) {
   str = stripAds(str); // It's important that this comes before the remainder
                        // because it matches on certain attribute values that
                        // get stripped below.
+  str = validator.sanitize(str).xss().replace(/\[removed\]/g, '')
   str = fixImages(str);
   str = stripUnsafeTags(str);
   str = stripUnsafeAttrs(str);
@@ -92,15 +97,15 @@ module.exports.stripComments = stripComments;
  * Permit only the provided attributes to remain in the tag
  */
 function filterAttrs () {
-  var allowed = []
-    , script = /javascript:/i;
+  var allowed = [];
+
   if (Array.isArray(arguments[0])) {
     allowed = arguments[0];
   } else {
     allowed = Array.prototype.slice.call(arguments);
   }
   return function (attr, name) {
-    if ( ~allowed.indexOf(name && name.toLowerCase()) && !script.test(attr) ) {
+    if ( ~allowed.indexOf(name && name.toLowerCase()) ) {
       return attr;
     } else {
       return '';
@@ -114,8 +119,8 @@ module.exports.filterAttrs = filterAttrs;
  */
 function stripAttrs () {
   var banned = []
-    , regexes = []
-    , script = /javascript:/i;
+    , regexes = [];
+
   if (Array.isArray(arguments[0])) {
     banned = arguments[0].filter(function (attr) {
       if ('string' === typeof attr) {
@@ -136,7 +141,7 @@ function stripAttrs () {
     });
   }
   return function (attr, name) {
-    if ( ~banned.indexOf(name && name.toLowerCase()) || script.test(attr) || regexes.some(function (re) { return re.test(name); }) ) {
+    if ( ~banned.indexOf(name && name.toLowerCase()) || regexes.some(function (re) { return re.test(name); }) ) {
       return '';
     } else {
       return attr;
@@ -190,7 +195,7 @@ module.exports.stripUnsafeAttrs = stripUnsafeAttrs;
 
 function stripUnsafeTags (str) {
   var el = /<(?:form|input|font|blink|script|style|comment|plaintext|xmp|link|listing|meta|body|frame|frameset)\b/;
-  var ct = 0, max = 10;
+  var ct = 0, max = 2;
 
   // We'll repeatedly try to strip any maliciously nested elements up to [max] times
   while (el.test(str) && ct++ < max) {

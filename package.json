@@ -22,10 +22,10 @@
     "node": ">= 0.6.0"
   },
   "dependencies": {
-    "validator": "~1.5.1"
+    "validator": "~7.0.0"
   },
   "devDependencies": {
-    "mocha": "~1.13.0"
+    "mocha": "~3.4.2"
   },
   "licenses": [
     {

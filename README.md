@@ -1,5 +1,7 @@
 #  Resanitize - Regular expression-based HTML sanitizer and ad remover, geared toward RSS feed descriptions
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/danmactough/node-resanitize.svg)](https://greenkeeper.io/)
+
 This node.js module provides functions for removing unsafe parts and ads from
 HTML. I am using it for the &lt;description&gt; element of RSS feeds.
 
